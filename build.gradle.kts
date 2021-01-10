@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.3.7.RELEASE"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
+	id("com.bmuschko.docker-spring-boot-application") version "6.6.1"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
 }
@@ -36,4 +37,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+docker {
+	springBootApplication {
+		baseImage.set("openjdk:16-jdk-alpine")
+		ports.set(listOf(8080))
+		jvmArgs.set(listOf("-Dspring.profiles.active=default", "-Xmx512m"))
+	}
 }
