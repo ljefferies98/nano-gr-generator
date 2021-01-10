@@ -22,11 +22,6 @@ class QRController {
         this.qrService = qrService
     }
 
-    @Bean
-    fun createImageHttpMessageConverter(): HttpMessageConverter<BufferedImage?>? {
-        return BufferedImageHttpMessageConverter()
-    }
-
     private val qrService: QRService;
 
     @PostMapping(path = ["/"], produces = [MediaType.IMAGE_PNG_VALUE])
