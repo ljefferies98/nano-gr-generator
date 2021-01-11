@@ -8,11 +8,12 @@ import uk.co.lewisjefferies.nanoqr.objects.QRProperties
 import java.awt.image.BufferedImage
 
 @Service
-class QRService {
+class QRService(private val validationService: ValidationService) {
 
     private val qrCodeWriter = QRCodeWriter();
 
     fun createQR(qrProperties: QRProperties): BufferedImage {
+        validationService.validateInput(qrProperties)
         val qrBody = constructQRBody(qrProperties);
         return generateQR(qrBody);
     }

@@ -17,7 +17,7 @@ data class QRProperties(
         builder.append(address)
 
         val data = getData()
-        if (data.size != 0) builder.append("?")
+        if (data.isNotEmpty()) builder.append("?")
 
         var count = 0
         for (pair in data) {
